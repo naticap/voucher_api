@@ -1,0 +1,8 @@
+@host = http://version_api.lndo.site/api/
+
+
+GET {{host}}customers?page=2
+Content-Type: application/json
+
+POST {{host}}customers
+Content-Type: application/json
