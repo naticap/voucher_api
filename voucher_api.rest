@@ -4,5 +4,10 @@
 GET {{host}}customers?page=2
 Content-Type: application/json
 
+### 
 POST {{host}}customers
+Content-Type: application/json
+
+### 
+GET {{host}}purchase-transactions?page=4
 Content-Type: application/json

@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Customer;
-use App\Models\PurchaseTransaction;
 use Illuminate\Database\Seeder;
 
-class CustomerSeeder extends Seeder
+class PurchaseTransactionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +13,6 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        Customer::factory(20)->has(PurchaseTransaction::factory(3))->create();
+        //
     }
 }
