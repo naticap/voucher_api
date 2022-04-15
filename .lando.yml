@@ -1,8 +1,11 @@
-name: version_api
+name: voucher_api
 recipe: laravel
 config:
   via: nginx
   webroot: public
+  xdebug: true
+  config:
+      php: .vscode/php.ini
 
 services:
   mailhog:

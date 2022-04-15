@@ -232,4 +232,5 @@ return [
 
     ],
 
+    'upload_minutes' => env('UPLOAD_MINUTES', 10)
 ];

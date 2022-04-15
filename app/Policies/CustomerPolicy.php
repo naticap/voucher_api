@@ -6,6 +6,7 @@ use App\Models\Customer;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Http\Response as HttpResponse;
 
 class CustomerPolicy
 {
@@ -104,9 +105,25 @@ class CustomerPolicy
     {   
         $eligible = 0;
         $trxs = $user->purchaseTransactions->whereBetween('created_at', [Carbon::now()->addDays(-30), now()]);
-        if($trxs->count() > 2) $eligible++;
+        if($trxs->count() >= 3) $eligible++;
         if($trxs->sum('total_spent') >= 100) $eligible++;
-        
-        return $eligible > 0;
+        if(!$user->voucher) $eligible++;
+        return $eligible === 3;
+    }
+
+    /**
+     * Determine whether the user still can upload 
+     * photo or not
+     *
+     * @param  \App\Models\Customer  $user
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function uploadPhoto(Customer $user)
+    {   
+        return $user->voucher->max_upload_datetime > Carbon::now() 
+                & !$user->voucher->redeemable
+                ? true 
+                : Response::deny("You're late, try again later");
     }
 }

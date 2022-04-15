@@ -27,11 +27,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     
     Route::resource('customers', CustomerController::class);
-    Route::get('eligible', [CustomerController::class, 'eligible']);
-
     Route::resource('vouchers', VoucherController::class);
-
     Route::resource('purchase-transactions', PurchaseTransactionController::class);
+
+    // ======== Route for feature voucher ====== // 
+    Route::get('eligible', [CustomerController::class, 'eligible']);
+    Route::get('reserve', [CustomerController::class, 'reserve']);
+    Route::post('upload-photo', [CustomerController::class, 'uploadPhoto']);
+    // ======== Route for feature voucher ====== // 
+    
     Route::get('logout', [AuthController::class, 'logout']);
 });
 
